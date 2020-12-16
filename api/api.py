@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import pusher
 import json
 
@@ -19,9 +19,10 @@ def index():
 
 @app.route('/paint',methods=['POST', 'GET'])
 def paint():
-   data = json.loads(request.data)data = json.loads(request.data)
+   print(request.data)
+   data = json.loads(request.data)
    pusher_client.trigger('painting', 'draw', data)
-   return jsonify(data)
+   
 
 
 if __name__ == '__main__':
